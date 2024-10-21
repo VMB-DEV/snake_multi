@@ -1,10 +1,15 @@
+import sys
 import os
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+import pygame
+import asyncio
 
 from engine.engine import Engine
 
-def main() -> int:
+async def main():
+    pygame.init()
     engine = Engine()
-    return 0
+    await engine.start()
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())
