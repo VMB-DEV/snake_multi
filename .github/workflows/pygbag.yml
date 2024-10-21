@@ -19,3 +19,4 @@ jobs:
       with:
         branch: test_game
         folder: build/web
+        token: ${{ secrets.PAT }}
