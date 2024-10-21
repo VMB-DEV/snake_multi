@@ -1,10 +1,8 @@
 import pygame
 
-from screens.game.game_screen import GameScreen
+from screens.Screen import Screen
 from screens.menus.menu_elements.button import Button
-from screens.menus.main_menu.Screen import Screen
 from screens.menus.menu_elements.indication import Indication
-from screens.menus.settings_menu.key_set import KeySet
 from screens.states.state import State
 from screens.states.state_manager import StateManager
 
@@ -39,10 +37,8 @@ class MainMenuScreen(Screen):
                 if event.key == pygame.K_RETURN:
                     if self._button_p1.is_selected:
                         self._state_manager.switch_state(State.SET_SOLO_GAME)
-                        # self._state_manager.launch_game(self._button_p2.is_selected)
                     elif self._button_p2.is_selected:
                         self._state_manager.switch_state(State.SET_DUO_GAME)
-                        # self._state_manager.launch_game(self._button_p2.is_selected)
                     else:
                         self._state_manager.go_to_settings()
                 elif event.key == pygame.K_UP:

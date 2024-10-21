@@ -1,11 +1,12 @@
-from typing import List
 import pygame
-from screens.menus.main_menu.Screen import Screen
+
+from screens.Screen import Screen
 from screens.menus.menu_elements.button import Button
 from screens.menus.menu_elements.indication import Indication
 from screens.menus.settings_menu.key_set import KeySet
 from screens.menus.settings_menu.settings_elements import SettingsElements
 from screens.states.state_manager import StateManager
+from typing import List
 
 
 class SettingsMenuScreen(Screen):
