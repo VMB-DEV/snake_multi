@@ -1,8 +1,5 @@
 from enum import Enum
 
-from proton.vpn.core.settings import SETTINGS
-
-
 class SettingsElements(Enum):
     UP = 0
     DOWN = 1

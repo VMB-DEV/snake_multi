@@ -1,5 +1,5 @@
 import pygame
-from screens.menus.main_menu.Screen import Screen
+from screens.Screen import Screen
 from screens.menus.menu_elements.button import Button
 from screens.menus.menu_elements.indication import Indication
 from screens.menus.pause_menu.PauseMenuElement import PauseMenuElement
