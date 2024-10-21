@@ -3,7 +3,7 @@ from screens.game.game_objects.direction import Direction
 from engine.color import Color
 from screens.game.game_objects.game_object_manager import GameObjectManager
 from screens.game.matrix import Matrix
-from screens.menus.main_menu.Screen import Screen
+from screens.Screen import Screen
 from screens.menus.settings_menu.key_set import KeySet
 from screens.states.state_manager import StateManager
 
@@ -19,7 +19,6 @@ class GameScreen(Screen):
         self._key_sets = key_sets
         self._matrix = Matrix(window_width, window_height)
         self._restart(multi)
-        # self._game_objects_manager = GameObjectManager(state_manager= self._state_manager, matrix=self._matrix, multi=self._multi)
 
     def _restart(self, multi: bool):
         self._multi = multi
@@ -57,14 +56,14 @@ class GameScreen(Screen):
                 elif self._key_sets[0].match_down(event.key):
                     self._game_objects_manager.update_first_snake_direction_to(Direction.DOWN)
                 if self._multi:
-                    if self._key_sets[0].match_up(event.key):
-                        self._game_objects_manager.update_first_snake_direction_to(Direction.UP)
-                    elif self._key_sets[0].match_right(event.key):
-                        self._game_objects_manager.update_first_snake_direction_to(Direction.RIGHT)
-                    elif self._key_sets[0].match_left(event.key):
-                        self._game_objects_manager.update_first_snake_direction_to(Direction.LEFT)
-                    elif self._key_sets[0].match_down(event.key):
-                        self._game_objects_manager.update_first_snake_direction_to(Direction.DOWN)
+                    if self._key_sets[1].match_up(event.key):
+                        self._game_objects_manager.update_second_snake_direction_to(Direction.UP)
+                    elif self._key_sets[1].match_right(event.key):
+                        self._game_objects_manager.update_second_snake_direction_to(Direction.RIGHT)
+                    elif self._key_sets[1].match_left(event.key):
+                        self._game_objects_manager.update_second_snake_direction_to(Direction.LEFT)
+                    elif self._key_sets[1].match_down(event.key):
+                        self._game_objects_manager.update_second_snake_direction_to(Direction.DOWN)
 
     def draw(self):
         for element in self._game_objects_manager.list:
