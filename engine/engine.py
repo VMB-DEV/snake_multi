@@ -1,16 +1,13 @@
-from os import environ
-
-from screens.menus.pause_menu.PauseMenuScreen import PauseMenuScreen
-from screens.menus.settings_menu.key_set import KeySet
-from screens.menus.settings_menu.settings_menu_screen import SettingsMenuScreen
-
-environ['PYGAME_HIDE_SUPPORT_PROMPT'] = '1'
+import asyncio
+import pygame
 
 from screens.menus.main_menu.main_menu_screen import MainMenuScreen
-import pygame
 from screens.game.game_screen import GameScreen
-from screens.states.state_manager import StateManager
+from screens.menus.pause_menu.PauseMenuScreen import PauseMenuScreen
+from screens.menus.settings_menu.key_set import KeySet
 from screens.states.state import State
+from screens.states.state_manager import StateManager
+from screens.menus.settings_menu.settings_menu_screen import SettingsMenuScreen
 
 
 class Engine:
@@ -25,10 +22,8 @@ class Engine:
         self._settings_menu = SettingsMenuScreen(display=self._display, state_manager=self._state_manager, window_width= window_width, window_height= window_height, key_sets=(self._key_set_p1, self._key_set_p2))
         self._main_menu_screen = MainMenuScreen(display=self._display, state_manager=self._state_manager, window_width= window_width, window_height= window_height)
         self._pause_menu_screen = PauseMenuScreen(display=self._display, state_manager=self._state_manager, window_width= window_width, window_height= window_height)
-        pygame.init()
-        self._start()
 
-    def _start(self):
+    async def start(self):
         clock = pygame.time.Clock()
         running = True
         while running:
@@ -55,7 +50,7 @@ class Engine:
                     print(f"unknown state {self._state_manager.get_state()}")
             pygame.display.flip()
             clock.tick(60)
-        self.__del__()
+            await asyncio.sleep(0)
 
     @property
     def _game_is_multi(self):
