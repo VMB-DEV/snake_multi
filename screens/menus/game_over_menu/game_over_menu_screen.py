@@ -11,9 +11,9 @@ class GameOverMenuScreen(Screen):
         self._score = score
         self._snake_1_win = snake_1_win
         self._name = ""
-        self._current_score_indication = Indication(self._display, f"you just made : {score} points", (0.5, 0.2), (self._window_width, self._window_height), False, Color.white())
-        self._name_indication = Indication(self._display, self._name, (0.5, 0.5), (self._window_width, self._window_height), False, Color.white())
-        self._bottom_indication = Indication(self._display, "press enter to save your name", (0.5, 0.8), (self._window_width, self._window_height), False, Color.white())
+        self._current_score_indication = self._create_indication(text=f"you reached : {score} points", x_y_ratios=(0.5, 0.2), shiny=False, color=Color.white())
+        self._name_indication = self._create_indication(text=self._name, x_y_ratios=(0.5, 0.5), shiny=False, color=Color.white())
+        self._bottom_indication = self._create_indication(text="press enter to save your name", x_y_ratios=(0.5, 0.8), shiny=True, color=Color.white())
 
     def draw(self):
         self._name_indication.draw()
@@ -34,7 +34,7 @@ class GameOverMenuScreen(Screen):
                         self.update_name(input_str)
 
     def update(self):
-        self._name_indication = Indication(self._display, self._name, (0.5, 0.5), (self._window_width, self._window_height), False, Color.white())
+        self._name_indication = self._create_indication(text=self._name, x_y_ratios=(0.5, 0.5), shiny=False, color=Color.white())
         self._bottom_indication.update()
         self._current_score_indication.update()
 
@@ -47,7 +47,7 @@ class GameOverMenuScreen(Screen):
 
     def set_score(self, score: int):
         self._score = score
-        self._current_score_indication = Indication(self._display, f"you just made : {score} points", (0.5, 0.2), (self._window_width, self._window_height), False, Color.white())
+        self._current_score_indication = self._create_indication(text=f"you reached : {score} points", x_y_ratios=(0.5, 0.2), shiny=False, color=Color.white())
 
     @property
     def name_score(self) -> (str, int):

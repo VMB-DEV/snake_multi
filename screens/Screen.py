@@ -1,6 +1,8 @@
 import pygame
 
 from engine.color import Color
+from screens.menus.menu_elements.button import Button
+from screens.menus.menu_elements.indication import Indication
 from screens.states.state_manager import StateManager
 
 
@@ -30,3 +32,8 @@ class Screen:
         
     def listen_to_input(self):
         print("not implemented")
+
+    def _create_indication(self, text: str, x_y_ratios: (float, float), shiny: bool, color: Color) -> Indication:
+        return Indication(display=self._display, text=text, x_y_ratio=x_y_ratios, window_size=(self._window_width, self._window_height), shiny=shiny, text_color=color)
+    def _create_button(self, text: str, x_y_ratios: (float, float), selected: bool) -> Button:
+        return Button(display=self._display, text=text, x_y_ratio=x_y_ratios, window_size=(self._window_width, self._window_height), selected=selected)

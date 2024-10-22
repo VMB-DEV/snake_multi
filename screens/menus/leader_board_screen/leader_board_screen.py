@@ -16,15 +16,18 @@ class LeaderBoardScreen(Screen):
         self._current_player_score = 0
         self._indication_lst : List[Indication] = [
             Indication(self._display, "", (0.35, 0.2), (self._window_width, self._window_height), False, Color.white()),
-            Indication(self._display, "", (0.35, 0.3), (self._window_width, self._window_height), False, Color.white()),
-            Indication(self._display, "", (0.35, 0.4), (self._window_width, self._window_height), False, Color.white()),
-            Indication(self._display, "", (0.35, 0.5), (self._window_width, self._window_height), False, Color.white()),
-            Indication(self._display, "", (0.35, 0.6), (self._window_width, self._window_height), False, Color.white()),
-            Indication(self._display, "", (0.35, 0.7), (self._window_width, self._window_height), False, Color.white()),
-            Indication(self._display, "", (0.35, 0.8), (self._window_width, self._window_height), False, Color.white()),
+            Indication(self._display, "", (0.35, 0.28), (self._window_width, self._window_height), False, Color.white()),
+            Indication(self._display, "", (0.35, 0.36), (self._window_width, self._window_height), False, Color.white()),
+            Indication(self._display, "", (0.35, 0.44), (self._window_width, self._window_height), False, Color.white()),
+            Indication(self._display, "", (0.35, 0.52), (self._window_width, self._window_height), False, Color.white()),
+            Indication(self._display, "", (0.35, 0.60), (self._window_width, self._window_height), False, Color.white()),
+            Indication(self._display, "", (0.35, 0.68), (self._window_width, self._window_height), False, Color.white()),
         ]
+        self._top_indication = Indication(self._display, "Leaderboard", (0.5, 0.1), (self._window_width, self._window_height), False, Color.white())
+        # self._main_menu_button = self._create_button(text=" main menu ", x_y_ratios=(0.5, 5))
 
     def draw(self):
+        self._top_indication.draw()
         for indication in self._indication_lst:
             indication.draw()
     def update(self):

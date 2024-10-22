@@ -22,11 +22,11 @@ class SettingsMenuScreen(Screen):
 
     def _init_indications(self):
         self._top_instruction = Indication(self._display, "press return key to select a new key", (0.4, 0.07), (self._window_width, self._window_height), True, Color.grey())
-        self._p1_indication = Indication(self._display, "player 1", (0.14, 0.2), (self._window_width, self._window_height), False, Color.grey())
-        self._p2_indication = Indication(self._display, "player 2", (0.62, 0.2), (self._window_width, self._window_height), False, Color.grey())
-        self._update_indication_text()
+        self._p1_indication = self._create_indication(text="player 1", x_y_ratios=(0.14, 0.2), shiny=False, color=Color.grey())
+        self._p2_indication = self._create_indication(text="player 2", x_y_ratios=(0.62, 0.2), shiny=False, color=Color.grey())
+        self._init_indication_text()
 
-    def _update_indication_text(self):
+    def _init_indication_text(self):
         p1_x_ratio = 0.35
         p2_x_ratio = 0.80
         up_y_ratio = 0.3
@@ -35,16 +35,16 @@ class SettingsMenuScreen(Screen):
         right_y_ratio = 0.75
         self._indications: List[List[Indication]] = [
             [
-                Indication(self._display, f"{self._key_sets[0].up_name}", (p1_x_ratio, up_y_ratio), (self._window_width, self._window_height), False, Color.grey()),
-                Indication(self._display, f"{self._key_sets[0].down_name}", (p1_x_ratio, down_y_ratio), (self._window_width, self._window_height), False, Color.grey()),
-                Indication(self._display, f"{self._key_sets[0].left_name}", (p1_x_ratio, left_y_ratio), (self._window_width, self._window_height), False, Color.grey()),
-                Indication(self._display, f"{self._key_sets[0].right_name}", (p1_x_ratio, right_y_ratio), (self._window_width, self._window_height), False, Color.grey()),
+                self._create_indication(text=f"{self._key_sets[0].up_name}", x_y_ratios=(p1_x_ratio, up_y_ratio), shiny=False, color=Color.grey()),
+                self._create_indication(text=f"{self._key_sets[0].down_name}", x_y_ratios=(p1_x_ratio, down_y_ratio), shiny=False, color=Color.grey()),
+                self._create_indication(text=f"{self._key_sets[0].left_name}", x_y_ratios=(p1_x_ratio, left_y_ratio), shiny=False, color=Color.grey()),
+                self._create_indication(text=f"{self._key_sets[0].right_name}", x_y_ratios=(p1_x_ratio, right_y_ratio), shiny=False, color=Color.grey()),
             ],
             [
-                Indication(self._display, f"{self._key_sets[1].up_name}", (p2_x_ratio, up_y_ratio), (self._window_width, self._window_height), False, Color.grey()),
-                Indication(self._display, f"{self._key_sets[1].down_name}", (p2_x_ratio, down_y_ratio), (self._window_width, self._window_height), False, Color.grey()),
-                Indication(self._display, f"{self._key_sets[1].left_name}", (p2_x_ratio, left_y_ratio), (self._window_width, self._window_height), False, Color.grey()),
-                Indication(self._display, f"{self._key_sets[1].right_name}", (p2_x_ratio, right_y_ratio), (self._window_width, self._window_height), False, Color.grey()),
+                self._create_indication(text=f"{self._key_sets[1].up_name}", x_y_ratios=(p2_x_ratio, up_y_ratio), shiny=False, color=Color.grey()),
+                self._create_indication(text=f"{self._key_sets[1].down_name}", x_y_ratios=(p2_x_ratio, down_y_ratio), shiny=False, color=Color.grey()),
+                self._create_indication(text=f"{self._key_sets[1].left_name}", x_y_ratios=(p2_x_ratio, left_y_ratio), shiny=False, color=Color.grey()),
+                self._create_indication(text=f"{self._key_sets[1].right_name}", x_y_ratios=(p2_x_ratio, right_y_ratio), shiny=False, color=Color.grey()),
             ]
         ]
 
@@ -55,19 +55,19 @@ class SettingsMenuScreen(Screen):
         down_y_ratio = 0.45
         left_y_ratio = 0.6
         right_y_ratio = 0.75
-        self._button_main_menu = Button(self._display, "main menu", (0.38, 0.9), (self._window_width, self._window_height), False)
+        self._button_main_menu = self._create_button(text="main menu", x_y_ratios=(0.38, 0.9), selected=False)
         self._buttons: List[List[Button]] =  [
             [
-                Button(self._display, "  up  ", (p1_x_ratio, up_y_ratio), (self._window_width, self._window_height), False),
-                Button(self._display, " down ", (p1_x_ratio, down_y_ratio), (self._window_width, self._window_height), False),
-                Button(self._display, " left ", (p1_x_ratio, left_y_ratio), (self._window_width, self._window_height), False),
-                Button(self._display, "right ", (p1_x_ratio, right_y_ratio), (self._window_width, self._window_height), False),
+                self._create_button(text="  up  ", x_y_ratios=(p1_x_ratio, up_y_ratio), selected=False),
+                self._create_button(text=" down ", x_y_ratios=(p1_x_ratio, down_y_ratio), selected=False),
+                self._create_button(text=" left ", x_y_ratios=(p1_x_ratio, left_y_ratio), selected=False),
+                self._create_button(text="right ", x_y_ratios=(p1_x_ratio, right_y_ratio), selected=False),
             ],
             [
-                Button(self._display, "  up  ", (p2_x_ratio, up_y_ratio), (self._window_width, self._window_height), False),
-                Button(self._display, " down ", (p2_x_ratio, down_y_ratio), (self._window_width, self._window_height), False),
-                Button(self._display, " left ", (p2_x_ratio, left_y_ratio), (self._window_width, self._window_height), False),
-                Button(self._display, "right ", (p2_x_ratio, right_y_ratio), (self._window_width, self._window_height), False),
+                self._create_button(text="  up  ", x_y_ratios=(p2_x_ratio, up_y_ratio), selected=False),
+                self._create_button(text=" down ", x_y_ratios=(p2_x_ratio, down_y_ratio), selected=False),
+                self._create_button(text=" left ", x_y_ratios=(p2_x_ratio, left_y_ratio), selected=False),
+                self._create_button(text="right ", x_y_ratios=(p2_x_ratio, right_y_ratio), selected=False),
             ]
         ]
 
@@ -89,12 +89,9 @@ class SettingsMenuScreen(Screen):
         self._p2_indication.update()
         for c, column in enumerate(self._indications):
             for r,indication in enumerate(column):
+                indication.update()
                 if self._selected_x == c and self._selected_y == r:
                     indication.shiny()
-                else:
-                    indication.unshiny()
-                indication.draw()
-        self._update_indication_text()
         for c, column in enumerate(self._buttons):
             for r, button in enumerate(column):
                 if self._selected_x == c and self._selected_y == r:
@@ -117,14 +114,19 @@ class SettingsMenuScreen(Screen):
                     match self._selected_y:
                         case SettingsElements.UP.value:
                             self._key_sets[self._selected_x].update_up(event.key)
+                            self._indications[self._selected_x][self._selected_y].set_text(self._key_sets[0].up_name)
                         case SettingsElements.DOWN.value:
                             self._key_sets[self._selected_x].update_down(event.key)
+                            self._indications[self._selected_x][self._selected_y].set_text(self._key_sets[0].down_name)
                         case SettingsElements.LEFT.value:
                             self._key_sets[self._selected_x].update_left(event.key)
+                            self._indications[self._selected_x][self._selected_y].set_text(self._key_sets[0].left_name)
                         case SettingsElements.RIGHT.value:
                             self._key_sets[self._selected_x].update_right(event.key)
+                            self._indications[self._selected_x][self._selected_y].set_text(self._key_sets[0].right_name)
                         case SettingsElements.MAIN_MENU.value:
                             print("SettingsMenUScreen.listen_to_input ERROR")
+                    self._deactivate_key_indication()
                     self._listen_to_new_key = False
                 elif event.key == pygame.K_RETURN:
                     if self._selected_y == SettingsElements.MAIN_MENU.value:
@@ -142,9 +144,7 @@ class SettingsMenuScreen(Screen):
                     self._selected_x = 0 if self._selected_x == 1 else 1
 
     def _activate_key_indication(self):
-        self._indications[self._selected_x][self._selected_y].shiny()
-        # self._indications[self._selected_x][self._selected_y].activate()
+        self._indications[self._selected_x][self._selected_y].set_text_color(Color.white())
 
     def _deactivate_key_indication(self):
-        self._indications[self._selected_x][self._selected_y].unshiny()
-
+        self._indications[self._selected_x][self._selected_y].set_text_color(Color.grey())
