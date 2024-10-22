@@ -10,8 +10,8 @@ class Button(MenuElement):
     step_plus = 0.7
     step_minus = -1.2
 
-    def __init__(self, display: pygame.display, text: string, x_y_ratio: (float, float), windows_size: (int, int), selected: bool):
-        super().__init__(display, text, x_y_ratio, windows_size, selected)
+    def __init__(self, display: pygame.display, text: string, x_y_ratio: (float, float), window_size: (int, int), selected: bool):
+        super().__init__(display, text, x_y_ratio, window_size, Color.grey())
         self._selected = selected
         self._init_borders()
         self._counter = self.counter_min

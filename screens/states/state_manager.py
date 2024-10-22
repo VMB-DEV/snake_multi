@@ -1,17 +1,29 @@
 from screens.states.state import State
 
 class StateManager:
-    def __init__(self, state=State.MENU_MAIN):  # Valeur par défaut: State.MENU_MAIN
+    def __init__(self, state=State.MENU_MAIN):
         self._l_state = [state]
-        self._current_state = state  # Initialisation avec l'état passé ou MENU_MAIN par défaut
+        self._current_state = state
 
     def switch_state(self, new_state):
         self._l_state[0] = new_state
         self._current_state = new_state
 
-    def end_of_game(self):
+    def go_to_leader_board(self):
+        if self.state == State.SET_LEADER_BOARD:
+            self.switch_state(new_state=State.LEADER_BOARD)
+        else:
+            print(f"StateManage current state {self.state}\nCan not go to leader board")
+
+    def set_leader_board(self):
+        if self.state == State.GAME_OVER:
+            self.switch_state(new_state=State.SET_LEADER_BOARD)
+        else:
+            print(f"StateManage current state {self.state}\nCan not set_leader_board")
+
+    def go_to_game_over(self):
         if self.state.is_in_game:
-            self.switch_state(new_state=State.END_GAME)
+            self.switch_state(new_state=State.GAME_OVER)
         else:
             print(f"StateManage current state {self.state}\nCan not end_of_game")
 
@@ -22,10 +34,7 @@ class StateManager:
             print(f"StateManage current state {self.state}\nCan not pause")
 
     def go_to_main(self):
-        if self.is_settings or self.is_paused:
-            self.switch_state(new_state=State.MENU_MAIN)
-        else:
-            print(f"StateManage current state {self.state}\nCan not go_to_main")
+        self.switch_state(new_state=State.MENU_MAIN)
 
     def go_to_settings(self):
         if self.is_main_menu():
@@ -42,9 +51,7 @@ class StateManager:
     def resume_button_selected(self):
         self.switch_state(new_state=State.RESUME)
 
-    # def resume_game(self, multi: bool):
     def resume_game(self):
-        # self.switch_state(new_state=State.DUO_GAME if multi else State.SOLO_GAME)
         self.switch_state(State.GAME)
 
     @property
@@ -64,7 +71,6 @@ class StateManager:
 
     def is_in_game(self):
         return self._current_state == State.GAME
-        # return self._current_state == State.SOLO_GAME or self._current_state == State.DUO_GAME
 
     def is_it_option_menu(self):
         return self._current_state == State.MENU_OPTION
@@ -78,3 +84,4 @@ class StateManager:
     @property
     def state(self):
         return self._current_state
+

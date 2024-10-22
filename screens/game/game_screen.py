@@ -69,10 +69,16 @@ class GameScreen(Screen):
         for element in self._game_objects_manager.list:
             element.draw(matrix = self._matrix, display = self._display)
         self.draw_score1()
+        if self._multi:
+            self.draw_score2()
 
     def draw_score1(self):
         txt_img = self._font.render(f"score : {self._score1}", True, self._text_color.rgb)
         self._display.blit(txt_img, (5, 5))
+
+    def draw_score2(self):
+        txt_img = self._font.render(f"score : {self._score2}", True, self._text_color.rgb)
+        self._display.blit(txt_img, (self._window_width - txt_img.get_width() - 5, 5))
 
     def update(self):
         self._game_objects_manager.update_donut()

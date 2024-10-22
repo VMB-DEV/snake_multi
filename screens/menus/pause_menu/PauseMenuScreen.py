@@ -1,4 +1,6 @@
 import pygame
+
+from engine.color import Color
 from screens.Screen import Screen
 from screens.menus.menu_elements.button import Button
 from screens.menus.menu_elements.indication import Indication
@@ -14,7 +16,7 @@ class PauseMenuScreen(Screen):
         self._selected = PauseMenuElement.RESUME.value
 
     def _init_indication(self):
-        self._top_indication = Indication(self._display, "game on pause", (0.5, 0.07), (self._window_width, self._window_height), False)
+        self._top_indication = Indication(self._display, "game on pause", (0.5, 0.07), (self._window_width, self._window_height), False, Color.grey())
 
     def _init_buttons(self):
         self._resume_button = Button(self._display, " resume ", (0.5, 0.4), (self._window_width, self._window_height), False)

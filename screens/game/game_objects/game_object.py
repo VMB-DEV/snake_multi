@@ -1,6 +1,5 @@
 import pygame
 
-from engine import values
 from engine.color import Color
 from screens.game.game_objects.game_object_type import GameObjectType
 from screens.game.grid_position import GridPosition
