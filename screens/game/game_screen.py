@@ -22,6 +22,7 @@ class GameScreen(Screen):
 
     def _restart(self, multi: bool):
         self._multi = multi
+        self._winner = 0
         self._counter = 0
         self._highest_score = 1
         self._score1 = 1
@@ -112,3 +113,7 @@ class GameScreen(Screen):
     @property
     def multi(self):
         return self._multi
+
+    @property
+    def winner(self):
+        return self._game_objects_manager.winner

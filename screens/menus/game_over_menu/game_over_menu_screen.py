@@ -6,14 +6,20 @@ from screens.menus.menu_elements.indication import Indication
 from screens.states.state_manager import StateManager
 
 class GameOverMenuScreen(Screen):
-    def __init__(self, display: pygame.display, window_width: int, window_height: int, state_manager: StateManager, snake_1_win: bool, score: int = 0):
+    not_multi = 0
+    def __init__(self, display: pygame.display, window_width: int, window_height: int, state_manager: StateManager, snake_1_win: bool):
         super().__init__(display, window_width, window_height, state_manager)
-        self._score = score
+        self._score = 0
+        self._winner = 0
         self._snake_1_win = snake_1_win
         self._name = ""
-        self._current_score_indication = self._create_indication(text=f"you reached : {score} points", x_y_ratios=(0.5, 0.2), shiny=False, color=Color.white())
+        self._top_text = "red snake " if self._winner == 1 else "blue snake " if self._winner == 2 else "you reached"
+        self._current_score_indication = self._create_indication(text=f"{self._top_text} reached : {self._score} points", x_y_ratios=(0.5, 0.2), shiny=False, color=Color.white())
         self._name_indication = self._create_indication(text=self._name, x_y_ratios=(0.5, 0.5), shiny=False, color=Color.white())
         self._bottom_indication = self._create_indication(text="press enter to save your name", x_y_ratios=(0.5, 0.8), shiny=True, color=Color.white())
+
+    def update_top_text(self):
+        self._top_text = "red snake win" if self._winner == 1 else "blue snake win" if self._winner == 2 else "you reached"
 
     def draw(self):
         self._name_indication.draw()
@@ -45,9 +51,13 @@ class GameOverMenuScreen(Screen):
         if len(self._name) > 0:
             self._name = self._name[:-1]
 
+    def set_winner(self, winner: int):
+        self._winner = winner
+
     def set_score(self, score: int):
         self._score = score
-        self._current_score_indication = self._create_indication(text=f"you reached : {score} points", x_y_ratios=(0.5, 0.2), shiny=False, color=Color.white())
+        self.update_top_text()
+        self._current_score_indication = self._create_indication(text=f"{self._top_text} : {self._score} points", x_y_ratios=(0.5, 0.2), shiny=False, color=Color.white())
 
     @property
     def name_score(self) -> (str, int):

@@ -16,8 +16,8 @@ class Engine:
     def __init__(self, window_width: int = 800, window_height: int = 800):
         self._window_height = window_height
         self._window_width = window_width
-        # self._state_manager = StateManager(State.MENU_MAIN)
-        self._state_manager = StateManager(State.GAME_OVER)
+        self._state_manager = StateManager(State.MENU_MAIN)
+        # self._state_manager = StateManager(State.GAME_OVER)
         self._display = pygame.display.set_mode((self._window_width, self._window_height))
         self._key_set_p1 = KeySet(pygame.K_i, pygame.K_k, pygame.K_j, pygame.K_l)
         self._key_set_p2 = KeySet(pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT)
@@ -41,7 +41,10 @@ class Engine:
                 case State.GAME:
                     self._game_screen.run()
                 case State.GAME_OVER:
-                    self._game_over_screen.set_score(15)
+                    winner = self._game_screen.winner
+                    self._game_over_screen.set_winner(winner)
+                    score = self._game_screen.highest_score
+                    self._game_over_screen.set_score(score)
                     self._game_over_screen.run()
                 case State.SET_LEADER_BOARD:
                     name_score: (str, int) = self._game_over_screen.name_score

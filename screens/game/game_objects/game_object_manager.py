@@ -24,6 +24,7 @@ class GameObjectManager:
         self._matrix = matrix
         self.init_snakes()
         self.init_donut()
+        self._winner = 0
 
     def init_snakes(self):
         self._snakes_directions = [Direction.UP, Direction.UP]
@@ -67,15 +68,20 @@ class GameObjectManager:
 
     def _are_snakes_eating_them_self(self):
         if self._snake1.is_eating_him_self():
+            if self._multi:
+               self._winner = 2
             self._state_manager.go_to_game_over()
         if self._multi:
             if self._snake2.is_eating_him_self():
+                self._winner = 1
                 self._state_manager.go_to_game_over()
 
     def _are_snakes_each_other(self):
         if self._snake1.is_eating_other_snake(self._snake2):
+            self._winner = 2
             self._state_manager.go_to_game_over()
         elif self._snake2.is_eating_other_snake(self._snake1):
+            self._winner = 1
             self._state_manager.go_to_game_over()
 
     def update_donut(self):
@@ -93,3 +99,6 @@ class GameObjectManager:
     @property
     def highest_score(self):
         return self.score1 if self.score1 > self.score2 else self.score2
+    @property
+    def winner(self):
+        return self._winner
