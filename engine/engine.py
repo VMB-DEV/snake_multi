@@ -17,9 +17,8 @@ class Engine:
         self._window_height = window_height
         self._window_width = window_width
         self._state_manager = StateManager(State.MENU_MAIN)
-        # self._state_manager = StateManager(State.GAME_OVER)
         self._display = pygame.display.set_mode((self._window_width, self._window_height))
-        self._key_set_p1 = KeySet(pygame.K_i, pygame.K_k, pygame.K_j, pygame.K_l)
+        self._key_set_p1 = KeySet(pygame.K_z, pygame.K_s, pygame.K_q, pygame.K_d)
         self._key_set_p2 = KeySet(pygame.K_UP, pygame.K_DOWN, pygame.K_LEFT, pygame.K_RIGHT)
         self._game_screen = GameScreen(display=self._display, state_manager=self._state_manager, window_width= window_width, window_height= window_height, key_sets=(self._key_set_p1, self._key_set_p2), multi=False)
         self._settings_menu = SettingsMenuScreen(display=self._display, state_manager=self._state_manager, window_width= window_width, window_height= window_height, key_sets=(self._key_set_p1, self._key_set_p2))
