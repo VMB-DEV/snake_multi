@@ -1,5 +1,6 @@
 import pygame
 
+from engine.color import Color
 from screens.Screen import Screen
 from screens.menus.menu_elements.button import Button
 from screens.menus.menu_elements.indication import Indication
@@ -20,9 +21,9 @@ class SettingsMenuScreen(Screen):
         self._listen_to_new_key = False
 
     def _init_indications(self):
-        self._top_instruction = Indication(self._display, "press return key to select a new key", (0.4, 0.07), (self._window_width, self._window_height), True)
-        self._p1_indication = Indication(self._display, "player 1", (0.14, 0.2), (self._window_width, self._window_height), False)
-        self._p2_indication = Indication(self._display, "player 2", (0.62, 0.2), (self._window_width, self._window_height), False)
+        self._top_instruction = Indication(self._display, "press return key to select a new key", (0.4, 0.07), (self._window_width, self._window_height), True, Color.grey())
+        self._p1_indication = Indication(self._display, "player 1", (0.14, 0.2), (self._window_width, self._window_height), False, Color.grey())
+        self._p2_indication = Indication(self._display, "player 2", (0.62, 0.2), (self._window_width, self._window_height), False, Color.grey())
         self._update_indication_text()
 
     def _update_indication_text(self):
@@ -34,16 +35,16 @@ class SettingsMenuScreen(Screen):
         right_y_ratio = 0.75
         self._indications: List[List[Indication]] = [
             [
-                Indication(self._display, f"{self._key_sets[0].up_name}", (p1_x_ratio, up_y_ratio), (self._window_width, self._window_height), False),
-                Indication(self._display, f"{self._key_sets[0].down_name}", (p1_x_ratio, down_y_ratio), (self._window_width, self._window_height), False),
-                Indication(self._display, f"{self._key_sets[0].left_name}", (p1_x_ratio, left_y_ratio), (self._window_width, self._window_height), False),
-                Indication(self._display, f"{self._key_sets[0].right_name}", (p1_x_ratio, right_y_ratio), (self._window_width, self._window_height), False),
+                Indication(self._display, f"{self._key_sets[0].up_name}", (p1_x_ratio, up_y_ratio), (self._window_width, self._window_height), False, Color.grey()),
+                Indication(self._display, f"{self._key_sets[0].down_name}", (p1_x_ratio, down_y_ratio), (self._window_width, self._window_height), False, Color.grey()),
+                Indication(self._display, f"{self._key_sets[0].left_name}", (p1_x_ratio, left_y_ratio), (self._window_width, self._window_height), False, Color.grey()),
+                Indication(self._display, f"{self._key_sets[0].right_name}", (p1_x_ratio, right_y_ratio), (self._window_width, self._window_height), False, Color.grey()),
             ],
             [
-                Indication(self._display, f"{self._key_sets[1].up_name}", (p2_x_ratio, up_y_ratio), (self._window_width, self._window_height), False),
-                Indication(self._display, f"{self._key_sets[1].down_name}", (p2_x_ratio, down_y_ratio), (self._window_width, self._window_height), False),
-                Indication(self._display, f"{self._key_sets[1].left_name}", (p2_x_ratio, left_y_ratio), (self._window_width, self._window_height), False),
-                Indication(self._display, f"{self._key_sets[1].right_name}", (p2_x_ratio, right_y_ratio), (self._window_width, self._window_height), False),
+                Indication(self._display, f"{self._key_sets[1].up_name}", (p2_x_ratio, up_y_ratio), (self._window_width, self._window_height), False, Color.grey()),
+                Indication(self._display, f"{self._key_sets[1].down_name}", (p2_x_ratio, down_y_ratio), (self._window_width, self._window_height), False, Color.grey()),
+                Indication(self._display, f"{self._key_sets[1].left_name}", (p2_x_ratio, left_y_ratio), (self._window_width, self._window_height), False, Color.grey()),
+                Indication(self._display, f"{self._key_sets[1].right_name}", (p2_x_ratio, right_y_ratio), (self._window_width, self._window_height), False, Color.grey()),
             ]
         ]
 
@@ -142,6 +143,8 @@ class SettingsMenuScreen(Screen):
 
     def _activate_key_indication(self):
         self._indications[self._selected_x][self._selected_y].shiny()
+        # self._indications[self._selected_x][self._selected_y].activate()
+
     def _deactivate_key_indication(self):
         self._indications[self._selected_x][self._selected_y].unshiny()
 

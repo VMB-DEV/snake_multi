@@ -1,5 +1,6 @@
 import pygame
 
+from engine.color import Color
 from screens.Screen import Screen
 from screens.menus.menu_elements.button import Button
 from screens.menus.menu_elements.indication import Indication
@@ -15,7 +16,7 @@ class MainMenuScreen(Screen):
         self._button_p1 = Button(self._display, "1 Player", (0.2, 0.3), (window_width, window_height), True)
         self._button_p2 = Button(self._display, "2 Player", (0.8, 0.3), (window_width, window_height), False)
         self._button_settings = Button(self._display, "settings", (0.5, 0.5), (window_width, window_height), False)
-        self._instruction = Indication(self._display, "select with arrow keys and return key", (0.5, 0.7), (window_width, window_height), True)
+        self._instruction = Indication(self._display, "select with arrow keys and return key", (0.5, 0.7), (window_width, window_height), True, Color.white())
         self._precedent_selection = 1
 
     def draw(self):

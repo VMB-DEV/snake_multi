@@ -11,6 +11,7 @@ class Indication(MenuElement):
 
     def __init__(self, display: pygame.display, text: string, x_y_ratio: (float, float), windows_size: (int, int), shiny: bool, text_color = Color.grey()):
         super().__init__(display, text, x_y_ratio, windows_size)
+        self._text_color = text_color
         self._counter = self.counter_min
         self._add_counter = 1
         self._shiny = bool
@@ -18,8 +19,7 @@ class Indication(MenuElement):
     def draw(self):
         if self._shiny:
             self._update_text_img()
-            # self._update_text_img(Color)
-        self._text_img.set_alpha(self._counter)
+            self._text_img.set_alpha(self._counter)
         self._display.blit(self._text_img, self._text_top_left)
 
     def update(self):
@@ -33,3 +33,6 @@ class Indication(MenuElement):
         self._shiny = True
     def unshiny(self):
         self._shiny = False
+
+    def set_text(self, text):
+        self._text = text

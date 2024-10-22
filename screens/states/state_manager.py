@@ -9,9 +9,21 @@ class StateManager:
         self._l_state[0] = new_state
         self._current_state = new_state
 
-    def end_of_game(self):
+    def go_to_leader_board(self):
+        if self.state == State.SET_LEADER_BOARD:
+            self.switch_state(new_state=State.LEADER_BOARD)
+        else:
+            print(f"StateManage current state {self.state}\nCan not go to leader board")
+
+    def set_leader_board(self):
+        if self.state == State.GAME_OVER:
+            self.switch_state(new_state=State.SET_LEADER_BOARD)
+        else:
+            print(f"StateManage current state {self.state}\nCan not set_leader_board")
+
+    def go_to_game_over(self):
         if self.state.is_in_game:
-            self.switch_state(new_state=State.END_GAME)
+            self.switch_state(new_state=State.GAME_OVER)
         else:
             print(f"StateManage current state {self.state}\nCan not end_of_game")
 
@@ -78,3 +90,4 @@ class StateManager:
     @property
     def state(self):
         return self._current_state
+

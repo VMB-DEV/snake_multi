@@ -67,16 +67,16 @@ class GameObjectManager:
 
     def _are_snakes_eating_them_self(self):
         if self._snake1.is_eating_him_self():
-            self._state_manager.end_of_game()
+            self._state_manager.go_to_game_over()
         if self._multi:
             if self._snake2.is_eating_him_self():
-                self._state_manager.end_of_game()
+                self._state_manager.go_to_game_over()
 
     def _are_snakes_each_other(self):
         if self._snake1.is_eating_other_snake(self._snake2):
-            self._state_manager.end_of_game()
+            self._state_manager.go_to_game_over()
         elif self._snake2.is_eating_other_snake(self._snake1):
-            self._state_manager.end_of_game()
+            self._state_manager.go_to_game_over()
 
     def update_donut(self):
         self._donut.update_donut()

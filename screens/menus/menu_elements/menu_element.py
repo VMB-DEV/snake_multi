@@ -31,7 +31,7 @@ class MenuElement:
 
     def draw(self):
         # self._update_text_img()
-        self._update_text_img(self._text_color)
+        self._update_text_img()
         self._display.blit(self._text_img, self._text_top_left)
         self._text_color = Color.white() if self._selected else Color.grey()
 
