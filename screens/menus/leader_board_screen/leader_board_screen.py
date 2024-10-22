@@ -15,26 +15,36 @@ class LeaderBoardScreen(Screen):
         self._current_player_name = ""
         self._current_player_score = 0
         self._indication_lst : List[Indication] = [
-            Indication(self._display, "", (0.35, 0.2), (self._window_width, self._window_height), False, Color.white()),
-            Indication(self._display, "", (0.35, 0.28), (self._window_width, self._window_height), False, Color.white()),
-            Indication(self._display, "", (0.35, 0.36), (self._window_width, self._window_height), False, Color.white()),
-            Indication(self._display, "", (0.35, 0.44), (self._window_width, self._window_height), False, Color.white()),
-            Indication(self._display, "", (0.35, 0.52), (self._window_width, self._window_height), False, Color.white()),
-            Indication(self._display, "", (0.35, 0.60), (self._window_width, self._window_height), False, Color.white()),
-            Indication(self._display, "", (0.35, 0.68), (self._window_width, self._window_height), False, Color.white()),
+            self._create_indication(text="", x_y_ratios=(0.35, 0.2), shiny=False, color=Color.white()),
+            self._create_indication(text="", x_y_ratios=(0.35, 0.28), shiny=False, color=Color.white()),
+            self._create_indication(text="", x_y_ratios=(0.35, 0.36), shiny=False, color=Color.white()),
+            self._create_indication(text="", x_y_ratios=(0.35, 0.44), shiny=False, color=Color.white()),
+            self._create_indication(text="", x_y_ratios=(0.35, 0.52), shiny=False, color=Color.white()),
+            self._create_indication(text="", x_y_ratios=(0.35, 0.60), shiny=False, color=Color.white()),
+            self._create_indication(text="", x_y_ratios=(0.35, 0.68), shiny=False, color=Color.white()),
         ]
-        self._top_indication = Indication(self._display, "Leaderboard", (0.5, 0.1), (self._window_width, self._window_height), False, Color.white())
-        # self._main_menu_button = self._create_button(text=" main menu ", x_y_ratios=(0.5, 5))
+        self._top_indication = self._create_indication(text="Leaderboard", x_y_ratios=(0.5, 0.1), shiny=False, color=Color.white())
+        self._main_menu_button = self._create_button(text=" main menu ", x_y_ratios=(0.5, 0.85), selected=True)
 
     def draw(self):
         self._top_indication.draw()
         for indication in self._indication_lst:
             indication.draw()
+        self._main_menu_button.draw()
+
     def update(self):
         for indication in self._indication_lst:
             indication.update()
+        self._main_menu_button.update()
+
     def listen_to_input(self):
-        pass
+        events = pygame.event.get()
+        for event in events:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    self._state_manager.go_to_main()
+
+
 
     def set_name_score(self, name_score: (int, str)):
         self._current_player_name = name_score[0]
@@ -44,14 +54,11 @@ class LeaderBoardScreen(Screen):
 
     def _update_leader_board(self):
         scores: int = LeaderBoard.get_scores()
-        top_scores = []
         i = 0
         y = 0.5
         delta = 0.1
         match = -1
         for point in scores.keys():
-            # if point == f"{self._current_player_score}" and scores[point] == self._current_player_name:
-            #     match = i
             self._indication_lst[i].set_text(f"{i + 1}. {point} : {scores[point]}")
             y += delta
             i += 1
@@ -59,14 +66,3 @@ class LeaderBoardScreen(Screen):
                 break
         if match != -1:
             self._indication_lst[match].shiny()
-        # self.draw()
-        # else:
-            # self._indication_lst.append(Indication(self._display, "you are not yet in the top players", (0.5, 0.9), (self._window_width, self._window_height), True, Color.grey()), )
-
-        # if (f"{self._current_player_score}", self._current_player_name) in top_scores:
-        #     self._indication_lst[self._current_player_score].shiny()
-        # else:
-        #     self._indication_lst.append( Indication(self._display, "you are not yet in the top players", (0.5, 0.9), (self._window_width, self._window_height), True, Color.grey()), )
-            # self._indication_lst.append( Indication(self._display, "...", (0.35, 0.85), (self._window_width, self._window_height), False, Color.grey()), )
-            # self._indication_lst.append( Indication(self._display, "", (0.35, 0.9), (self._window_width, self._window_height), false, Color.white()), )
-            # Indication(self._display, f"{i + 1}. {self._current_player_score} : {self._current_player_name}", (0.35, 0.2), (self._window_width, self._window_height), false, Color.white()),
