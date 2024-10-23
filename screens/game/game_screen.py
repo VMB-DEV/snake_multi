@@ -9,7 +9,7 @@ from screens.states.state_manager import StateManager
 
 
 class GameScreen(Screen):
-    start_max_counter = 3.5
+    start_max_counter = 3.0
     start_add_counter = 0.3
 
     def __init__(self, display: pygame.display, window_width: int, window_height: int, state_manager: StateManager, multi: bool, key_sets: (KeySet, KeySet)):
